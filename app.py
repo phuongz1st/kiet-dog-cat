@@ -8,9 +8,9 @@ from PIL import Image
 # 1. Cấu hình trang Web
 st.set_page_config(page_title="Cat vs Dog Detector", page_icon="🐾")
 
-st.title("🐶 Cat vs Dog Detector 🐱")
+st.title(" Cat vs Dog Detector ")
 st.write("Project Web Deploy - Detect Cat & Dog")
-st.write("Sinh viên thực hiện: [Tên của bạn]")
+st.write("Trần Tuấn Kiệt-2286400013")
 
 # 2. Load Model (Sử dụng Cache để không load lại mỗi lần f5)
 @st.cache_resource
@@ -57,8 +57,17 @@ if uploaded_file is not None:
 
             # Danh sách từ khóa
             # Lưu ý: ImageNet chia rất kỹ (VD: 'tabby', 'tiger_cat'...) nên ta check string
-            dog_keywords = ['dog', 'terrier', 'retriever', 'spaniel', 'shepherd', 'hound', 'boxer', 'bulldog', 'dalmatian', 'husky', 'corgi', 'pug']
-            cat_keywords = ['cat', 'tabby', 'tiger', 'siamese', 'persian', 'lynx', 'leopard', 'kitten']
+            # Danh sách từ khóa Mèo (giữ nguyên hoặc bổ sung thêm)
+            cat_keywords = ['cat', 'tabby', 'tiger', 'siamese', 'persian', 'lynx', 'leopard', 'kitten', 'cougar', 'lion', 'panther', 'cheetah', 'jaguar']
+
+            # Danh sách từ khóa Chó (Cập nhật đầy đủ hơn)
+            dog_keywords = [
+                'dog', 'terrier', 'retriever', 'spaniel', 'shepherd', 'hound', 'boxer', 'bulldog', 'dalmatian', 
+                'husky', 'corgi', 'pug', 'pomeranian', 'chihuahua', 'beagle', 'collie', 'poodle', 'rottweiler', 
+                'doberman', 'shiba', 'akita', 'malamute', 'samoyed', 'chow', 'dane', 'mastiff', 'bernese', 
+                'newfoundland', 'schnauzer', 'pinscher', 'sheepdog', 'pointer', 'vizsla', 'setter', 'maltese', 
+                'papillon', 'pekingese', 'spitz', 'whippet', 'basenji', 'borzoi', 'greyhound', 'bloodhound', 'wolf'
+            ]
 
             # Kiểm tra label cao nhất
             check_str = top_label.lower()
@@ -72,10 +81,10 @@ if uploaded_file is not None:
             # Hiển thị kết quả
             st.divider()
             if is_dog:
-                st.success(f"Kết quả: ĐÂY LÀ CHÓ (DOG) 🐶 - ({top_label})")
+                st.success(f"Kết quả: ĐÂY LÀ CHÓ (DOG)  - ({top_label})")
                 st.progress(float(prob))
             elif is_cat:
-                st.success(f"Kết quả: ĐÂY LÀ MÈO (CAT) 🐱 - ({top_label})")
+                st.success(f"Kết quả: ĐÂY LÀ MÈO (CAT)  - ({top_label})")
                 st.progress(float(prob))
             else:
                 # Nếu không phải chó/mèo (trường hợp user up ảnh xe cộ, người...)
